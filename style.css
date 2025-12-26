@@ -26,6 +26,7 @@ body {
     color: var(--text-main);
     font-family: var(--font-body);
     overflow-x: hidden;
+    transition: background-color 0.3s ease, color 0.3s ease; /* Transisi halus saat ganti tema */
 }
 
 /* --- BACKGROUND GRID 3D --- */
@@ -41,6 +42,7 @@ body {
     animation: gridMove 20s linear infinite;
     z-index: -2;
     pointer-events: none;
+    transition: background-image 0.3s ease;
 }
 
 .vignette {
@@ -50,6 +52,7 @@ body {
     background: radial-gradient(circle, transparent 0%, #050505 90%);
     z-index: -1;
     pointer-events: none;
+    transition: background 0.3s ease;
 }
 
 @keyframes gridMove {
@@ -76,7 +79,7 @@ body {
     position: fixed;
     top: 0; left: 0;
     transform: translate(-50%, -50%);
-    transition: width 0.2s, height 0.2s, background-color 0.2s;
+    transition: width 0.2s, height 0.2s, background-color 0.2s, border-color 0.2s;
     pointer-events: none;
     z-index: 9998;
 }
@@ -93,6 +96,7 @@ header {
     background: rgba(5, 5, 5, 0.8);
     backdrop-filter: blur(5px);
     border-bottom: 1px solid rgba(0, 243, 255, 0.2);
+    transition: background 0.3s ease, border-bottom 0.3s ease;
 }
 
 .sys-status {
@@ -421,6 +425,7 @@ footer {
     background: #020205;
     text-align: center;
     position: relative;
+    transition: background 0.3s ease;
 }
 
 .footer-border {
@@ -465,6 +470,120 @@ footer {
     font-size: 0.8em;
     color: #444;
 }
+
+/* --- DROPDOWN TEMA --- */
+.theme-dropdown {
+    display: inline-block;
+    position: relative;
+    margin-left: 30px;
+}
+
+.theme-btn {
+    background: none;
+    border: none;
+    font-family: var(--font-head);
+    color: var(--text-main);
+    font-size: 0.9em;
+    cursor: none; /* Sesuai custom cursor */
+    padding: 0;
+}
+
+.theme-btn:hover {
+    color: var(--primary);
+    text-shadow: 0 0 10px var(--primary);
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background-color: rgba(5, 5, 5, 0.95);
+    border: 1px solid var(--primary);
+    min-width: 180px;
+    box-shadow: 0 0 15px rgba(0, 243, 255, 0.2);
+    z-index: 1000;
+    padding: 10px 0;
+}
+
+.dropdown-content a {
+    color: var(--text-main);
+    padding: 10px 20px;
+    text-decoration: none;
+    display: block;
+    font-family: var(--font-body);
+    font-size: 0.85em;
+    margin-left: 0;
+    transition: 0.3s;
+}
+
+.dropdown-content a:hover {
+    background-color: rgba(0, 243, 255, 0.1);
+    color: var(--primary);
+    padding-left: 25px; /* Efek geser */
+}
+
+/* Tampilkan dropdown saat hover */
+.theme-dropdown:hover .dropdown-content {
+    display: block;
+}
+
+
+/* --- KONFIGURASI LIGHT MODE --- */
+body.light-mode {
+    --bg-color: #e6e6e6; /* Abu-abu terang futuristik */
+    --text-main: #111111; /* Hitam agar kontras */
+    --text-dim: #444444;
+    --primary: #008c94; /* Cyan lebih gelap agar terbaca di background terang */
+    --secondary: #8a0cb8;
+}
+
+/* Penyesuaian khusus Light Mode */
+body.light-mode .cyber-grid {
+    background-image: 
+        linear-gradient(rgba(0, 0, 0, 0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 0, 0, 0.1) 1px, transparent 1px);
+}
+
+body.light-mode .vignette {
+    background: radial-gradient(circle, transparent 0%, rgba(255,255,255,0.8) 90%);
+}
+
+body.light-mode header {
+    background: rgba(230, 230, 230, 0.9);
+    border-bottom: 1px solid rgba(0, 140, 148, 0.3);
+}
+
+body.light-mode .cyber-card, 
+body.light-mode .activity-card {
+    background: rgba(255, 255, 255, 0.7);
+    border: 1px solid rgba(0, 140, 148, 0.5);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+body.light-mode .hero-glitch {
+    color: #222;
+    text-shadow: 2px 2px rgba(0, 243, 255, 0.3);
+}
+
+body.light-mode .hero-glitch::before, 
+body.light-mode .hero-glitch::after {
+    background: var(--bg-color); /* Agar efek glitch menyatu dengan background terang */
+}
+
+body.light-mode footer {
+    background: #dcdcdc;
+}
+
+body.light-mode .footer-border {
+    background: linear-gradient(90deg, transparent, #666, transparent);
+}
+
+body.light-mode .dropdown-content {
+    background-color: rgba(240, 240, 240, 0.95);
+    border-color: var(--primary);
+}
+
 
 /* RESPONSIVE */
 @media (max-width: 768px) {
